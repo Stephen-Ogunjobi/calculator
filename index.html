@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+</head>
+
+<style>
+    *{
+        box-sizing: border-box;
+    }
+    body{
+        background-color: aliceblue;
+        display: flex;
+        height: 100vh;
+        align-items: center;
+        justify-content: center;
+    }
+    .calculator{
+        display: flex;
+        flex-direction: column;
+        height: 70vh;
+        width: 300px;
+        background-color: #595651;
+        border-radius: 10px;
+        gap: 16px;
+    }
+
+    #display{
+        color: #fff;
+    }
+    .body{
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(5, auto);
+        gap: 20px;
+    }
+    #screen{
+        height: 100px;
+        margin-top: 20px;
+        padding: 20px;
+    }
+    #keypad{
+        padding: 0 20px 20px 20px;
+    }
+    button{
+        height: 50px;
+        text-align: center;
+        background-color: #877f70;
+        border-radius: 5px;
+        box-shadow: 5px 5px 5px #000;
+        color: #fff;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+    }
+    button:hover{
+        background-color: #595651;
+    }
+    .ac, .delete, .equals{
+        color: aquamarine  !important;
+    }
+    #screen input{
+        width: 100%;
+        text-align: right;
+        background: none;
+        border: none;
+        font-size: 40px;
+        font-family: monospace;
+    }
+    .equals{
+        grid-column: span 2;
+        width: 100%;
+    }
+    .equals > button {
+        font-size: 30px;
+    }
+    .name{
+        text-align: center;
+        font-size: 11px;
+    }
+    @media (max-width: 391px) {
+        .calculator{
+            height: 67vh;
+            gap: 25px;
+        }
+        button{
+            border: none;
+        }
+        #screen input{
+            width: 90%;
+        }
+    }
+</style>
+
+<body>
+    <div class="container calculator">
+        <div id="screen">
+            <input id="display" type="text" placeholder="0">
+         </div>
+
+        <div id="keypad">
+            <div class="container body">
+                <button onclick="clearDisplay()" class="ac">AC</button>
+                <button onclick="deleteLast()" class="delete">DE</button>
+                <button onclick="appendToDisplay('.')">.</button>
+                <button onclick="appendToDisplay('/')">/</button>
+
+                <button onclick="appendToDisplay('7')">7</button>
+                <button onclick="appendToDisplay('8')">8</button>
+                <button onclick="appendToDisplay('9')">9</button>
+                <button onclick="appendToDisplay('*')">X</button>
+
+                <button onclick="appendToDisplay('4')">4</button>
+                <button onclick="appendToDisplay('5')">5</button>
+                <button onclick="appendToDisplay('6')">6</button>
+                <button onclick="appendToDisplay('-')">-</button>
+
+                <button onclick="appendToDisplay('1')">1</button>
+                <button onclick="appendToDisplay('2')">2</button>
+                <button onclick="appendToDisplay('3')">3</button>
+                <button onclick="appendToDisplay('+')">+</button>
+
+                <button onclick="appendToDisplay('00')">00</button>
+                <button onclick="appendToDisplay('0')">0</button>
+                <button onclick="calculate()" class="equals">=</button>
+            
+            </div>
+        </div>
+        <div class="name">
+            Designed by Stephen Ogunjobi.
+        </div>
+    </div>
+
+    <script>
+
+        const display = document.getElementById('display');
+
+function appendToDisplay(input) {
+    display.value += input;
+}
+
+function clearDisplay() {
+    display.value = '';
+}
+
+function deleteLast() {
+    display.value = display.value.slice(0, -1);
+}
+
+function calculate(){
+    try{
+        display.value = eval(display.value);
+    } catch {
+        display.value = 'ERROR';
+    }
+}
+    </script>
+</body>
+</html>
